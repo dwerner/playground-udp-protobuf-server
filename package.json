@@ -1,0 +1,15 @@
+{
+  "name": "cloud-native-library",
+  "version": "0.0.1",
+  "description": "Trying out ideas with node first",
+  "main": "index.js",
+	"private":true,
+	"dependencies" : {
+		"protocol-buffers":"*"
+	},
+  "scripts": {
+    "test": "test ./test/ --recursive"
+  },
+  "author": "dan.werner@hubblehome.com",
+  "license": "UNLICENSED"
+}

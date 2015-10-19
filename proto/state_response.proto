@@ -1,0 +1,12 @@
+message ValueType {
+	required double double_value = 2;
+}
+
+message Event {
+	required string deviceId = 1;
+	required string peripheralId = 2;
+	required string profileId = 3;
+	required ValueType newState = 4;
+	required ValueType oldState = 5;
+	required int64 timestamp = 6;
+}

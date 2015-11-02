@@ -16,7 +16,7 @@ c.on('listening', () => {
 	});
 
 	setInterval(() => {
-		console.log("Sending message to server"+address+":"+port);
+		console.log("Sending message to server "+address+":"+port);
 		c.send(new Client.Event({
 			newState: { value: "one" },
 			oldState: { value: "two" },

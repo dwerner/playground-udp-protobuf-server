@@ -19,14 +19,14 @@ c.on('listening', () => {
 			console.log("got a subscription from "+rinfo.address+":"+rinfo.port);
 			clients.push({address:rinfo.address, port:rinfo.port, messageCount:1});
 		} else {
-			console.log("message from existing subscription recvd.", existingClient.address, existingClient.port);
+			//console.log("message from existing subscription recvd.", existingClient.address, existingClient.port);
 			existingClient.messageCount += 1;
 		}
 	});
 
 	setInterval( () => {
 		console.log("Clients connected: "+clients.length);
-		console.log(JSON.stringify(clients, null, 2));
+		console.log(JSON.stringify(clients));
 	}, 5000);
 
 });

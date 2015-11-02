@@ -40,7 +40,9 @@ class Client extends EventEmitter {
 		});
 	}
 
-	close() { this.socket.close(); }
+	close() { 
+		this.socket.close();
+	}
 }
 
 class Event {
@@ -55,13 +57,13 @@ class Event {
 }
 
 function serialize(message) {
-//	return messages.Event.encode(message);
-	return JSON.stringify(message);
+	return messages.Event.encode(message);
+//	return JSON.stringify(message);
 }
 
 function deserialize(message) {
-//	return new Event(messages.Event.decode(message));
-	return JSON.parse(message.toString());
+	return new Event(messages.Event.decode(message));
+//	return JSON.parse(message.toString());
 }
 
 

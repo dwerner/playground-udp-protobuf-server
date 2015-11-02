@@ -6,18 +6,28 @@ console.log(process.argv);
 let port = 41234;
 let c = new Client(port);
 let messageCount = 0;
+let clients = [];
 
 c.on('listening', () => {
 	console.log("server listening on port "+port+"...");
 	c.on('message', (msg, rinfo) => {
-		messageCount += 1;
 		//console.log("got a message from "+rinfo.address+":"+rinfo.port, JSON.stringify(msg,null,2));
-		c.send(new Client.Event({
-			newState: { value: "one" },
-			oldState: { value: "two" },
-			timestamp: 0
-		}), rinfo.address, rinfo.port, () => {});
+		if (!clients.findIndex(x => x.address === rinfo.address && x.port === rinfo.port)) {
+			clients.push({address:rinfo.address, port:rinfo.port});
+		}
 	});
+	setTimeout(() => {
+		clients.forEach((client)=>{
+
+			console.log("Sending message to client: "+client.addres+":"+client.port);
+
+			c.send(new Client.Event({
+				newState: { value: "one" },
+				oldState: { value: "two" },
+				timestamp: 0
+			}), client.address, client.port, () => {});
+		});
+	}, 1000);
 });
 
 process.on('unhandledException', (err) => {

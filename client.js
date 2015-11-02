@@ -18,7 +18,7 @@ c.on('listening', () => {
 		}), rinfo.address, rinfo.port, () => {});
 	});
 
-	console.log("sending initial message to server at "+rinfo.address+":"+rinfo.port);
+	console.log("sending initial message to server at "+address+":"+port);
 	c.send(new Client.Event({
 		newState: { value: "one" },
 		oldState: { value: "two" },
@@ -27,6 +27,9 @@ c.on('listening', () => {
 
 });
 
+process.on('unhandledException', (err) => {
+	console.log("UNHANDLED EXCEPTION:", err);
+});
 process.on('exit', () => {
 	console.log("client exiting...");
 	c.close();

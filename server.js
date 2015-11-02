@@ -18,6 +18,9 @@ c.on('listening', () => {
 	});
 });
 
+process.on('unhandledException', (err) => {
+	console.log("UNHANDLED EXCEPTION:", err);
+});
 process.on('exit', () => {
 	console.log("server exiting...");
 	c.close();

@@ -16,7 +16,7 @@ class Client extends EventEmitter {
 			throw err;
 		});
 		this.socket.on('message', (msg, rinfo) => {
-			this.emit('message', deserialize(msg), rinfo, msg.length);
+			this.emit('message', deserialize(msg), rinfo, length);
 		});
 		this.socket.on('listening', () => {
 			this.port = this.socket.address().port;
@@ -35,7 +35,7 @@ class Client extends EventEmitter {
 				console.log("Encountered error sending message :", message);
 				throw err;
 			} else {
-				cb();
+				cb({bytesSent:buffer.length});
 			}
 		});
 	}

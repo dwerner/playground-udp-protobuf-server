@@ -17,12 +17,22 @@ c.on('listening', () => {
 		});
 		if (! existingClient ) {
 			console.log("got a subscription from "+rinfo.address+":"+rinfo.port);
-			clients.push({address:rinfo.address, port:rinfo.port, messageCount:1, bytes:length});
+			clients.push({
+				address:rinfo.address,
+				port:rinfo.port,
+				messageCount:1,
+				bytes:length,
+				expectedSequence:0
+			});
 		} else {
 			console.log("message from existing subscription recvd.",
 					existingClient.address, existingClient.port);
 			existingClient.messageCount += 1;
 			existingClient.bytes += length;
+			existingClient.expectedSequence += 1;
+		}
+		if (msg.sequence !== existingClient.expectedSequence) {
+			console.log("Messages out of sequence.");
 		}
 	});
 

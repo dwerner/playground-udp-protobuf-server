@@ -8,6 +8,8 @@ let messageCount = 0;
 
 let c = new Client();
 
+let sequence = 0l
+
 c.on('listening', () => {
 
 	c.on('message', (msg, rinfo, length) => {
@@ -16,12 +18,16 @@ c.on('listening', () => {
 	});
 
 	setInterval(() => {
+		sequence += 1;
 		console.log("Sending message to server "+address+":"+port);
 		c.send(new Client.Event({
 			newState: { value: "one" },
 			oldState: { value: "two" },
+			sequence: sequence,
 			timestamp: 0
-		}), address, port, () => {});
+		}), address, port, (sendProperties) => {
+			console.log(sendProperties);
+		});
 	}, 1000);
 
 });

@@ -35,7 +35,6 @@ class Client extends EventEmitter {
 				console.log("Encountered error sending message :", message);
 				throw err;
 			} else {
-				this.socket.close();
 				cb();
 			}
 		});

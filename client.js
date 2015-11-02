@@ -4,19 +4,21 @@ const Client = require('.');
 // EC2 instance running server.js
 let address = "52.32.190.38";
 let port = 41234;
+let messageCount = 0;
 
 let c = new Client();
 
 c.on('listening', () => {
 
 	c.on('message', (msg, rinfo) => {
-		console.log("got a message from "+rinfo.address+":"+rinfo.port, JSON.stringify(msg,null,2));
+		//console.log("got a message from "+rinfo.address+":"+rinfo.port, JSON.stringify(msg,null,2));
+		messageCount += 1;
 		c.send(new Client.Event({
 			newState: { value: "one" },
 			oldState: { value: "two" },
 			timestamp: 0
 		}), rinfo.address, rinfo.port, () => {
-			console.log("replied");
+		//	console.log("replied");
 		});
 	});
 

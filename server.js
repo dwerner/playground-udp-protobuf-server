@@ -5,11 +5,13 @@ console.log(process.argv);
 
 let port = 41234;
 let c = new Client(port);
+let messageCount = 0;
 
 c.on('listening', () => {
 	console.log("server listening on port "+port+"...");
 	c.on('message', (msg, rinfo) => {
-		console.log("Got message", JSON.stringify(msg,null,2));
+		messageCount += 1;
+		//console.log("got a message from "+rinfo.address+":"+rinfo.port, JSON.stringify(msg,null,2));
 		c.send(new Client.Event({
 			newState: { value: "one" },
 			oldState: { value: "two" },

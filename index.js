@@ -16,7 +16,7 @@ class Client extends EventEmitter {
 			throw err;
 		});
 		this.socket.on('message', (msg, rinfo) => {
-			this.emit('message', deserialize(msg), rinfo, length);
+			this.emit('message', deserialize(msg), rinfo, msg.length);
 		});
 		this.socket.on('listening', () => {
 			this.port = this.socket.address().port;

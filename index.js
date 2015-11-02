@@ -45,7 +45,6 @@ class Client extends EventEmitter {
 
 class Event {
 	constructor(options) {
-		console.log(options);
 		this.deviceId = options.deviceId || "";
 		this.peripheralId = options.peripheralId || "";
 		this.profileId = options.profileId || "";

@@ -13,4 +13,5 @@ message Event {
 	required ValueType newState = 4;
 	required ValueType oldState = 5;
 	required int64 timestamp = 6;
+	required int64 sequence = 7;
 }

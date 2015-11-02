@@ -53,6 +53,7 @@ class Event {
 		this.newState = newValueState(options.newState);
 		this.oldState = newValueState(options.oldState);
 		this.timestamp = options.timestamp || 0;
+		this.sequence = options.sequence || 0;
 	}
 }
 

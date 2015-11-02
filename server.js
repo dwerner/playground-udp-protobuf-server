@@ -27,7 +27,7 @@ c.on('listening', () => {
 	setTimeout( () => {
 		console.log("Clients connected: "+clients.length);
 		console.log(JSON.stringify(clients, null, 2));
-	}, 10000);
+	}, 1000);
 
 });
 

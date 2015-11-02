@@ -8,7 +8,7 @@ let c = new Client(port);
 
 c.on('listening', () => {
 	console.log("server listening on port "+port+"...");
-	c.on('message', (msg) => {
+	c.on('message', (msg, rinfo) => {
 		console.log("Got message", JSON.stringify(msg,null,2));
 		c.send(new Client.Event({
 			newState: { value: "one" },
@@ -21,6 +21,7 @@ c.on('listening', () => {
 process.on('unhandledException', (err) => {
 	console.log("UNHANDLED EXCEPTION:", err);
 });
+
 process.on('exit', () => {
 	console.log("server exiting...");
 	c.close();

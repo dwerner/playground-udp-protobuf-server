@@ -10,8 +10,8 @@ let c = new Client();
 
 c.on('listening', () => {
 
-	c.on('message', (msg, rinfo) => {
-		console.log("got a message from "+rinfo.address+":"+rinfo.port, JSON.stringify(msg,null,2));
+	c.on('message', (msg, rinfo, length) => {
+		console.log("got a message from "+rinfo.address+":"+rinfo.port+" bytes:" + length);
 		messageCount += 1;
 	});
 

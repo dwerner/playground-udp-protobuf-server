@@ -15,7 +15,7 @@ class Client extends EventEmitter {
 			console.log('error in socket:');
 			throw err;
 		});
-		this.socket.on('message', (msg, rinfo) => {
+		this.socket.on('message', (msg, rinfo, length) => {
 			this.emit('message', deserialize(msg), rinfo);
 		});
 		this.socket.on('listening', () => {
@@ -29,7 +29,7 @@ class Client extends EventEmitter {
 
 	send(message, target, port, cb) {
 		let buffer = new Buffer(serialize(message));
-		console.log('sending buffer(hex): ', buffer.toString('hex'), 0, buffer.length, port, target);
+//		console.log('sending buffer(hex): ', buffer.toString('hex'), 0, buffer.length, port, target);
 		this.socket.send(buffer, 0, buffer.length, port, target, (err) => {
 			if (err) {
 				console.log("Encountered error sending message :", message);

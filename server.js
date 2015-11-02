@@ -22,7 +22,7 @@ c.on('listening', () => {
 				port:rinfo.port,
 				messageCount:1,
 				bytes:length,
-				expectedSequence:0
+				expectedSequence:1
 			});
 		} else {
 			console.log("message from existing subscription recvd.",

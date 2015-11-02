@@ -8,7 +8,7 @@ let messageCount = 0;
 
 let c = new Client();
 
-let sequence = 0l
+let sequence = 0;
 
 c.on('listening', () => {
 

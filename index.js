@@ -8,7 +8,7 @@ const fs = require('fs');
 const messages = protobuf(fs.readFileSync('./proto/messages.proto'));
 
 class Client extends EventEmitter {
-	constructor() {
+	constructor(port) {
 		super();
 		this.socket = dgram.createSocket('udp4');
 		this.socket.on('error', (err) => {
@@ -16,13 +16,13 @@ class Client extends EventEmitter {
 			throw err;
 		});
 		this.socket.on('message', (msg, rinfo) => {
-			this.emit('message', deserialize(msg) );
+			this.emit('message', deserialize(msg), rinfo);
 		});
 		this.socket.on('listening', () => {
 			this.port = this.socket.address().port;
 			this.emit('listening');
 		});
-		this.socket.bind(() => {
+		this.socket.bind({port:port}, () => {
 			this.emit('bound');
 		});
 	}

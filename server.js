@@ -24,10 +24,10 @@ c.on('listening', () => {
 		}
 	});
 
-	setTimeout( () => {
+	setInterval( () => {
 		console.log("Clients connected: "+clients.length);
 		console.log(JSON.stringify(clients, null, 2));
-	}, 1000);
+	}, 5000);
 
 });
 

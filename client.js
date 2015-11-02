@@ -15,7 +15,7 @@ c.on('listening', () => {
 		messageCount += 1;
 	});
 
-	setTimeout(() => {
+	setInterval(() => {
 		console.log("Sending message to server"+address+":"+port);
 		c.send(new Client.Event({
 			newState: { value: "one" },

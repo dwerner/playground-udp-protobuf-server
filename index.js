@@ -68,7 +68,6 @@ function deserialize(message) {
 
 function newValueState(options) {
 	let state = {};
-	console.log(options);
 	if (options.value !== undefined) {
 		let valueAccessor = isNaN(options.value) ? "string_value" : "double_value";
 		state[valueAccessor] = options.value;

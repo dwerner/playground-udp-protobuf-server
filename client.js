@@ -15,7 +15,9 @@ c.on('listening', () => {
 			newState: { value: "one" },
 			oldState: { value: "two" },
 			timestamp: 0
-		}), rinfo.address, rinfo.port, () => {});
+		}), rinfo.address, rinfo.port, () => {
+			console.log("replied");
+		});
 	});
 
 	console.log("sending initial message to server at "+address+":"+port);
@@ -23,7 +25,9 @@ c.on('listening', () => {
 		newState: { value: "one" },
 		oldState: { value: "two" },
 		timestamp: 0
-	}), address, port, () => {});
+	}), address, port, () => {
+		console.log("sent initial message.");
+	});
 
 });
 

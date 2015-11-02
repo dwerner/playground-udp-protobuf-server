@@ -1,5 +1,9 @@
+
 message ValueType {
-	required double double_value = 2;
+	oneof value {
+		 string string_value = 4;
+		 double double_value = 9;
+	}
 }
 
 message Event {

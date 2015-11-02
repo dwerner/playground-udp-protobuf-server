@@ -11,14 +11,12 @@ let c = new Client();
 let sequence = 0;
 
 c.on('listening', () => {
-
 	c.on('message', (msg, rinfo, length) => {
 		console.log("got a message from "+rinfo.address+":"+rinfo.port+" bytes:" + length);
 		messageCount += 1;
 	});
 
 	setInterval(() => {
-		sequence += 1;
 		console.log("Sending message to server "+address+":"+port);
 		c.send(new Client.Event({
 			newState: { value: "one" },
@@ -27,9 +25,9 @@ c.on('listening', () => {
 			timestamp: 0
 		}), address, port, (sendProperties) => {
 			console.log(sendProperties);
+			sequence += 1;
 		});
 	}, 1000);
-
 });
 
 process.on('unhandledException', (err) => {

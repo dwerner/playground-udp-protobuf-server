@@ -30,9 +30,9 @@ c.on('listening', () => {
 			existingClient.messageCount += 1;
 			existingClient.bytes += length;
 			existingClient.expectedSequence += 1;
-		}
-		if (msg.sequence !== existingClient.expectedSequence) {
-			console.log("Messages out of sequence.");
+			if (msg.sequence !== existingClient.expectedSequence) {
+				console.log("Messages out of sequence.");
+			}
 		}
 	});
 

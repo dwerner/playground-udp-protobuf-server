@@ -15,14 +15,14 @@ c.on('listening', () => {
 		messageCount += 1;
 	});
 
-	console.log("sending initial message to server at "+address+":"+port);
-	c.send(new Client.Event({
-		newState: { value: "one" },
-		oldState: { value: "two" },
-		timestamp: 0
-	}), address, port, () => {
-		console.log("sent initial message.");
-	});
+	setTimeout(() => {
+		console.log("Sending message to server: "+client.addres+":"+client.port);
+		c.send(new Client.Event({
+			newState: { value: "one" },
+			oldState: { value: "two" },
+			timestamp: 0
+		}), address, port, () => {});
+	}, 1000);
 
 });
 

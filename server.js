@@ -43,7 +43,7 @@ c.on('listening', () => {
 		console.log(JSON.stringify(clients, null, 2));
 
 		clients.forEach( client => {
-			console.log("Sending message to client "+address+":"+port);
+			console.log("Sending message to client "+client.address+":"+client.port);
 			c.send(new Client.Event({
 				newState: { value: "two" },
 				oldState: { value: "one" },

@@ -60,10 +60,10 @@ class WireFrame {
 }
 
 WireFrame.parseFrom = function (buffer) {
-	const HEADER_SIZE = 3;
+	const HEADER_SIZE = 2;
 
-	let headerBytes = buffer.slice(0,HEADER_SIZE-1);
-	let messageBytes = buffer.slice(HEADER_SIZE-1);
+	let headerBytes = buffer.slice(0,HEADER_SIZE);
+	let messageBytes = buffer.slice(HEADER_SIZE);
 
 	console.log(headerBytes.toString('hex'), messageBytes.toString('hex'));
 	let header = messages.Header.decode(headerBytes);

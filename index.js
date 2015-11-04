@@ -28,8 +28,9 @@ class Client extends EventEmitter {
 	}
 
 	send(message, target, port, cb) {
-		let buffer = new Buffer(serialize(message));
-//		console.log('sending buffer(hex): ', buffer.toString('hex'), 0, buffer.length, port, target);
+		let buffer = new WireFrame(message).toBuffer();
+		
+		console.log('sending buffer(hex): ', buffer.toString('hex'), 0, buffer.length, port, target);
 		this.socket.send(buffer, 0, buffer.length, port, target, (err) => {
 			if (err) {
 				console.log("Encountered error sending message :", message);
@@ -45,6 +46,33 @@ class Client extends EventEmitter {
 	}
 }
 
+
+class WireFrame {
+	constructor(message) {
+		this.message = message;
+	}
+
+	toBuffer() {
+		let messageBuffer = serialize(this.message);
+		let headerBuffer = messages.Header.encode({length: messageBuffer.length});
+		return Buffer.concat([headerBuffer, messageBuffer]);
+	}
+}
+
+WireFrame.parseFrom = function (buffer) {
+	const HEADER_SIZE = 3;
+
+	let headerBytes = buffer.slice(0,HEADER_SIZE-1);
+	let messageBytes = buffer.slice(HEADER_SIZE-1);
+
+	console.log(headerBytes.toString('hex'), messageBytes.toString('hex'));
+	let header = messages.Header.decode(headerBytes);
+
+	// more checking could be done here with a specific look inside Header
+	let message = messages.Event.decode(messageBytes);
+	return new WireFrame(message);
+};
+
 class Event {
 	constructor(options) {
 		this.deviceId = options.deviceId || "";
@@ -58,13 +86,14 @@ class Event {
 }
 
 function serialize(message) {
-	return messages.Event.encode(message);
-//	return JSON.stringify(message);
+	if (message instanceof Event) {
+		return messages.Event.encode(message);
+	}
 }
 
 function deserialize(message) {
-	return new Event(messages.Event.decode(message));
-//	return JSON.parse(message.toString());
+	let frame = WireFrame.parseFrom(message);
+	return new Event(frame.message);
 }
 
 

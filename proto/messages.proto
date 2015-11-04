@@ -12,12 +12,11 @@ message Header {
 }
 
 message Event {
-	required Header header = 1;
-	required string deviceId = 2;
-	required string peripheralId = 3;
-	required string profileId = 4;
-	required ValueType newState = 5;
-	required ValueType oldState = 6;
-	required int64 timestamp = 7;
-	required int64 sequence = 8;
+	required string deviceId = 1;
+	required string peripheralId = 2;
+	required string profileId = 3;
+	required ValueType newState = 4;
+	required ValueType oldState = 5;
+	required int64 timestamp = 6;
+	required int64 sequence = 7;
 }

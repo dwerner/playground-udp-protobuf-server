@@ -48,7 +48,7 @@ c.on('listening', () => {
 				newState: { value: "two" },
 				oldState: { value: "one" },
 				sequence: 0,
-				timestamp: 0
+				timestamp: new Date().getTime(),
 			}), client.address, client.port, (sendProperties) => {
 				console.log(sendProperties);
 			});
